@@ -3,6 +3,7 @@ package pkg1;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -23,12 +24,15 @@ public class P3 {
 		int pos1;
 		int len1=0;
 		int len2=0;
+		int computerMarks=0;
+		int usrMarks=0;
 		while(sc1.hasNext()) {
 			String temp=sc1.nextLine();
 			dict1.add(temp);
 		}
 		pos1=rand1.nextInt(dict1.size());
 		compChoice1=dict1.get(pos1);
+		computerMarks+=compChoice1.length();
 		System.out.println("Computer: "+compChoice1);
 		dict1.remove(compChoice1);
 		len1=compChoice1.length();
@@ -36,6 +40,7 @@ public class P3 {
 		while(true) {
 			System.out.print("User: ");
 			usrChoice1=sc2.nextLine().toLowerCase();
+			usrMarks+=usrChoice1.length();
 			usrFirstChar1=usrChoice1.substring(0,1);
 			if(dict1.contains(usrChoice1)&&usrFirstChar1.equals(sysLastChar1)) {
 				dict1.remove(usrChoice1);
@@ -43,14 +48,21 @@ public class P3 {
 				String usrLastChar1=usrChoice1.substring(len2-1,len2);
 				List<String> temp1=dict1.stream().filter(word->word.startsWith(usrLastChar1)).collect(Collectors.toList());
 				pos1=rand1.nextInt(temp1.size());
+				int max=0;
 				compChoice1=temp1.get(pos1);
+				computerMarks+=compChoice1.length();
 				dict1.remove(compChoice1);
 				System.out.println("Computer: "+compChoice1);
 				len1=compChoice1.length();
 				sysLastChar1=compChoice1.substring(len1-1,len1);        //thread.sleep() user and computer marks
 			}
 			else {
-				System.out.println("Computer Wins");
+				if(usrMarks>computerMarks)
+				{
+					System.out.println("you won! with "+ usrMarks +" Points");
+					break;
+				}
+				System.out.println("Computer Wins with " + computerMarks +" Points");
 				break;
 			}
 		}

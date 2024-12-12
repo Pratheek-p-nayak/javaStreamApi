@@ -26,12 +26,6 @@ Seventy
 Eighty
 Ninety
 Hundred
-Two Hundred
-Three Hundred
-Four Hundred
-Five Hundred
-Six Hundred
-Seven Hundred
-Eight Hundred
-Nine Hundred
 Thousand
+Lakh
+Crore
