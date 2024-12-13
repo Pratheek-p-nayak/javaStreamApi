@@ -7,53 +7,71 @@ import java.util.List;
 import java.util.Scanner;
 
 public class P2 {
-	public static List<String> loadFile(String fName) throws FileNotFoundException{
+	
+	static List<String> list1=new ArrayList<>();
+	static List<Integer> list2=new ArrayList<>();
+	static String result1="";
+	public static List<String> loadFile1(String fName) throws FileNotFoundException{
 		File f1=new File(fName);
-		List<String> list1= new ArrayList<>();
 		Scanner sc2=new Scanner(f1);
 		while(sc2.hasNext()) {
 			list1.add(sc2.nextLine());
 		}
 		return list1;
 	}
-	public static String printIfExists(int num1,List<String> list1,List<String> list2){
-		String result1 = "";
-		String temp1=String.valueOf(num1);
-		int pos1=list2.indexOf(temp1);
+	public static List<Integer> loadFile2(String fName) throws FileNotFoundException{
+		File f1=new File(fName);
+		Scanner sc2=new Scanner(f1);
+		while(sc2.hasNext()) {
+			list2.add(sc2.nextInt());
+		}
+		return list2;
+	}
+	public static String ifExists(int num1) {
+		int pos1;
+		pos1=list2.indexOf(num1);
 		result1=list1.get(pos1);
 		return result1;
 	}
-	public static String printTwentyOneToHundred(int num1,List<String> list1,List<String> list2) {
+	public static String printTwentyToHundred(int num1) {
 		int part2=num1%10;
 		int part1=num1-part2;
-		String result1=printIfExists(part1, list1, list2)+" "+printIfExists(part2, list1, list2);	
+		result1=ifExists(part1)+" "+ifExists(part2);
 		return result1;
 	}
-	public static void main(String[] args) throws FileNotFoundException {
-		int num1;
-		List<String> list1= new ArrayList<>();
-		List<String> list2= new ArrayList<>();
-		Scanner sc1=new Scanner(System.in);
-		list1=loadFile("english_numbers.txt");
-		list2=loadFile("numerics.txt");
-		num1=sc1.nextInt();
-		String temp1=String.valueOf(num1);
-		String number="";
-		String result="";
-		if(list2.contains(temp1)) {
-			result=printIfExists(num1, list1, list2);	
-			System.out.println(result);
+	public static String printHundredToThousand(int num1) {
+		int part2=num1%100;//21
+		int part1=num1-part2;
+		int part3=part2%10;
+		part2=part2-part3;
+		result1=ifExists(part1)+" and "+ifExists(part2)+" "+ifExists(part3);
+		return result1;
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException{
+		loadFile1("english_numbers.txt");
+		loadFile2("numerics.txt");
+		Scanner sc1= new Scanner(System.in);
+		int num1=sc1.nextInt();
+		if(list2.contains(num1)) {
+			result1=ifExists(num1);
 		}
-		else if(num1>20&&num1<=100) {
-			result=printTwentyOneToHundred(num1, list1, list2);
-			System.out.println(result);
+		else {
+			if(num1>20&&num1<100) {
+				result1=printTwentyToHundred(num1);
+			}
+			else if(num1>100&&num1<1000) {
+				result1=printHundredToThousand(num1);
+			}
+			else if(num1>1000&&num1<100000) {
+				int part1=num1/1000;//2101 2
+				int part2=part1*1000;//2 2000
+				int part3=num1%1000;//2101 101
+				int part4=part3%100;//101 1
+//				part3=
+			}
 		}
-		else if(num1>100&&num1<=1000) {
-			int part2=num1%100;
-			int part1=num1-part2;
-//			result=print
-		}
-		System.out.println(printTwentyOneToHundred(num1, list1, list2));
+		System.out.println(result1);
 	}
 
 }
