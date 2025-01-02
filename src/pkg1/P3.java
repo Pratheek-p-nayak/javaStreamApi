@@ -26,7 +26,7 @@ public class P3 {
 		int len2=0;
 		int computerMarks=0;
 		int usrMarks=0;
-		while(sc1.hasNext()) {
+		while(sc1.hasNextLine()) {
 			String temp=sc1.nextLine();
 			dict1.add(temp);
 		}

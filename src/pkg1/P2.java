@@ -64,7 +64,7 @@ public class P2 {
 				result1=printHundredToThousand(num1);
 			}
 			else if(num1>1000&&num1<100000) {
-				int part1=num1/1000;//2101 2
+				int part1=num1/1000;//2101 2  
 				int part2=part1*1000;//2 2000
 				int part3=num1%1000;//2101 101
 				int part4=part3%100;//101 1
